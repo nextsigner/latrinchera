@@ -55,7 +55,7 @@ Window {
             }
             TextInput{
                 id: tiAppId
-                text: apps.uIdApp//'https://github.com/nextsigner/semitimes-m1'
+                text: '222'//apps.uIdApp//'https://github.com/nextsigner/semitimes-m1'
                 width: xApp.width-app.fs*4
                 height: app.fs*1.2
                 font.pixelSize: app.fs
@@ -101,7 +101,7 @@ Window {
                             unikObj.uUrl=url
                             let descargado=unikObj.downloadGitHubZip(urlZipFile, pn+"_main.zip");
                             if(descargado){
-                                apps.uIdApp=url
+                                //apps.uIdApp=url
                             }
                         }else{
                             for(var i=0;i<app.uAppsList.length;i++){
@@ -116,7 +116,7 @@ Window {
                                         unikObj.uUrl=url
                                         let descargado = unikObj.downloadGitHubZip(urlZipFile, args[1]+"_main.zip");
                                         if(descargado){
-                                            apps.uIdApp=url
+                                            //apps.uIdApp=url
                                         }
                                     }
                                 }
@@ -269,7 +269,7 @@ Window {
                 }
             }
             onDownloadFinished: function(success, filePath) {
-                apps.uIdApp=unikObj.uUrl
+                //apps.uIdApp=unikObj.uUrl
                 let msg=""
                 let folder=''
                 if(Qt.platform.os==='android'){
@@ -299,7 +299,7 @@ Window {
                         }
                         engine.load(mainFile)
                         //if(tiAppId.text!=='0' && app.isRunikStart){
-                            apps.uIdApp=tiAppId.text
+                            //apps.uIdApp=tiAppId.text
                         //}
                         app.close()
                         console.log(msg)
@@ -317,7 +317,7 @@ Window {
                         }
                         engine.load(mainFile)
                         //if(tiAppId.text!=='0' && app.isRunikStart){
-                            apps.uIdApp=tiAppId.text
+                            //apps.uIdApp=tiAppId.text
                         //}
                         app.close()
                     }else{
@@ -401,7 +401,7 @@ Window {
         }
 
             if(apps.autoLoad){
-                tiAppId.text=apps.uIdApp
+                //tiAppId.text=apps.uIdApp
                 tiAppId.focus=true
                 tiAppId.selectAll()
             }
