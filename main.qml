@@ -137,6 +137,9 @@ Window {
                         font.pixelSize: app.fs
                         color: apps.fontColor
                         anchors.centerIn: parent
+                        onTextChanged: {
+                            apps.uAppId=tiAppId.text
+                        }
                     }
                 }
             }
@@ -156,43 +159,55 @@ Window {
                     font.pixelSize: app.fs
                     onClicked: run()
                     function run(){
+
                         console.log('btnActualizar.run()...')
-                        let urlZipFile
-                        if(tiAppId.text.indexOf('https:')===0 || tiAppId.text==='0'){
-                            let url=tiAppId.text
-                            if(tiAppId.text==='0'){
-                                url="https://github.com/nextsigner/runik-start"
-                            }
-                            urlZipFile=getGitHubZipUrl(url)
-                            let m0=url.split('/')
-                            let pn=m0[m0.length-1]
-                            unikObj.cProject=pn
-                            setHistorial(tiAppId.text)
-                            unikObj.uUrl=url
-                            let descargado=unikObj.downloadGitHubZip(urlZipFile, pn+"_main.zip");
-                            if(descargado){
-                                //apps.uIdApp=url
-                            }
-                        }else{
-                            for(var i=0;i<app.uAppsList.length;i++){
-                                let linea=app.uAppsList[i]
-                                if(linea.length>3){
-                                    let args=linea.split(' ')
-                                    if(args[0]===tiAppId.text && tiAppId.text!=='0'){
-                                        unikObj.cProject=args[1]
-                                        urlZipFile=getGitHubZipUrl(args[2])
-                                        //statusText.text='Descargando '+urlZipFile
-                                        setHistorial(tiAppId.text)
-                                        unikObj.uUrl=url
-                                        let descargado = unikObj.downloadGitHubZip(urlZipFile, args[1]+"_main.zip");
-                                        if(descargado){
-                                            //apps.uIdApp=url
-                                        }
-                                    }
-                                }
-                            }
+                        let urlZipFile='http://'+apps.uIp+':'+apps.uPort+'/zip/'+apps.uAppId
+                        unikObj.cProject=pn
+                        setHistorial(tiAppId.text)
+                        unikObj.uUrl=urlZipFile
+                        let descargado=unikObj.downloadGitHubZip(urlZipFile, apps.uAppId+"_main.zip");
+                        if(descargado){
+                            //apps.uIdApp=url
                         }
+
+//                        if(tiAppId.text.indexOf('https:')===0 || tiAppId.text==='0'){
+//                            let url=tiAppId.text
+//                            if(tiAppId.text==='0'){
+//                                url="https://github.com/nextsigner/runik-start"
+//                            }
+//                            urlZipFile=getGitHubZipUrl(url)
+//                            let m0=url.split('/')
+//                            let pn=m0[m0.length-1]
+//                            unikObj.cProject=pn
+//                            setHistorial(tiAppId.text)
+//                            unikObj.uUrl=url
+//                            let descargado=unikObj.downloadGitHubZip(urlZipFile, pn+"_main.zip");
+//                            if(descargado){
+//                                //apps.uIdApp=url
+//                            }
+//                        }else{
+//                            for(var i=0;i<app.uAppsList.length;i++){
+//                                let linea=app.uAppsList[i]
+//                                if(linea.length>3){
+//                                    let args=linea.split(' ')
+//                                    if(args[0]===tiAppId.text && tiAppId.text!=='0'){
+//                                        unikObj.cProject=args[1]
+//                                        urlZipFile=getGitHubZipUrl(args[2])
+//                                        //statusText.text='Descargando '+urlZipFile
+//                                        setHistorial(tiAppId.text)
+//                                        unikObj.uUrl=url
+//                                        let descargado = unikObj.downloadGitHubZip(urlZipFile, args[1]+"_main.zip");
+//                                        if(descargado){
+//                                            //apps.uIdApp=url
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+
                     }
+
+
                 }
             }
             ProgressBar {
