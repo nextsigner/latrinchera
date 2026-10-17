@@ -59,7 +59,7 @@ Window {
                     anchors.verticalCenter: parent.verticalCenter
                 }
                 Rectangle{
-                    width: app.fs*10
+                    width: xApp.width-app.fs
                     height: app.fs*1.2
                     color: 'transparent'
                     border.width: 1
