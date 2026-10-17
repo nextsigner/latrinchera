@@ -16,14 +16,17 @@ Window {
         id: apps
         property color backgroundColor: 'black'
         property color fontColor: 'white'
+        property string uAppId: ''
+        property string uIp: ''
+        property int uPort: 8080
     }
     Connections{
         target: qmlErrorLogger
         onMessagesChanged:{
             //if(Qt.platform.os==='linux' && app.enableQmlErrorLog && apps.dev && ap){
-                //app.flags=Qt.Window
-                //app.visibility="Maximized"
-                log.text+=''+qmlErrorLogger.messages[qmlErrorLogger.messages.length-1]+'<br>'
+            //app.flags=Qt.Window
+            //app.visibility="Maximized"
+            log.text+=''+qmlErrorLogger.messages[qmlErrorLogger.messages.length-1]+'<br>'
             //}
         }
     }
@@ -46,28 +49,31 @@ Window {
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Item{width: 1; height: app.fs*3}
-            Text{
-                id: labelAppId
-                text: "Ingresar nombre, url o código de la aplicación:"
-                font.pixelSize: app.fs
-                color: apps.fontColor
-                anchors.left: tiAppId.left
-            }
-            TextInput{
-                id: tiAppId
-                text: '222'//apps.uIdApp//'https://github.com/nextsigner/semitimes-m1'
-                width: xApp.width-app.fs*4
-                height: app.fs*1.2
-                font.pixelSize: app.fs
-                color: apps.fontColor
-                anchors.horizontalCenter: parent.horizontalCenter
+            Row{
+                Text{
+                    id: labelAppId
+                    text: "Ingresar nombre, url o código de la aplicación:"
+                    font.pixelSize: app.fs
+                    color: apps.fontColor
+                    anchors.left: tiAppId.left
+                }
                 Rectangle{
-                    width: parent.width+app.fs*0.5
-                    height: parent.height+app.fs*0.5
+                    width: app.fs*10
+                    height: app.fs*1.2
                     color: 'transparent'
                     border.width: 1
                     border.color: apps.fontColor
                     anchors.centerIn: parent
+                    clip: true
+                    TextInput{
+                        id: tiAppId
+                        text: '222'//apps.uIdApp//'https://github.com/nextsigner/semitimes-m1'
+                        width: parent.width-app.fs
+                        height: app.fs
+                        font.pixelSize: app.fs
+                        color: apps.fontColor
+                        anchors.centerIn: parent
+                    }
                 }
             }
             Row{
@@ -299,7 +305,7 @@ Window {
                         }
                         engine.load(mainFile)
                         //if(tiAppId.text!=='0' && app.isRunikStart){
-                            //apps.uIdApp=tiAppId.text
+                        //apps.uIdApp=tiAppId.text
                         //}
                         app.close()
                         console.log(msg)
@@ -317,7 +323,7 @@ Window {
                         }
                         engine.load(mainFile)
                         //if(tiAppId.text!=='0' && app.isRunikStart){
-                            //apps.uIdApp=tiAppId.text
+                        //apps.uIdApp=tiAppId.text
                         //}
                         app.close()
                     }else{
@@ -400,11 +406,11 @@ Window {
             }
         }
 
-            if(apps.autoLoad){
-                //tiAppId.text=apps.uIdApp
-                tiAppId.focus=true
-                tiAppId.selectAll()
-            }
+        if(apps.autoLoad){
+            //tiAppId.text=apps.uIdApp
+            tiAppId.focus=true
+            tiAppId.selectAll()
+        }
 
         getAppsList()
 
