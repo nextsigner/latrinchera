@@ -17,7 +17,7 @@ Window {
         property color backgroundColor: 'black'
         property color fontColor: 'white'
         property string uAppId: ''
-        property string uIp: ''
+        property string uIp: '192.168.0.35'
         property int uPort: 8080
     }
     Connections{
@@ -50,6 +50,38 @@ Window {
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Item{width: 1; height: app.fs*3}
+            Row{
+                spacing: app.fs
+                anchors.horizontalCenter: parent.horizontalCenter
+                Text{
+                    id: labelIp
+                    text: "Ip:"
+                    font.pixelSize: app.fs
+                    color: apps.fontColor
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+                Rectangle{
+                    width: app.fs*10
+                    height: app.fs*2
+                    color: 'transparent'
+                    border.width: 1
+                    border.color: apps.fontColor
+                    anchors.verticalCenter: parent.verticalCenter
+                    clip: true
+                    TextInput{
+                        id: tiIp
+                        text: apps.uIp
+                        width: parent.width-app.fs
+                        height: app.fs
+                        font.pixelSize: app.fs
+                        color: apps.fontColor
+                        anchors.centerIn: parent
+                        onTextChanged: {
+                            apps.uIp=tiIp.text
+                        }
+                    }
+                }
+            }
             Row{
                 spacing: app.fs
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -90,7 +122,7 @@ Window {
                     anchors.verticalCenter: parent.verticalCenter
                 }
                 Rectangle{
-                    width: xApp.width-labelAppId.contentWidth-parent.spacing
+                    width: xApp.width-labelAppId.contentWidth-parent.spacing*2
                     height: app.fs*2
                     color: 'transparent'
                     border.width: 1
