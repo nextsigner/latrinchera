@@ -53,13 +53,13 @@ Window {
                 spacing: app.fs
                 Text{
                     id: labelAppId
-                    text: "Ingresar nombre, url o código de la aplicación:"
+                    text: "Nombre de App:"
                     font.pixelSize: app.fs
                     color: apps.fontColor
                     anchors.verticalCenter: parent.verticalCenter
                 }
                 Rectangle{
-                    width: xApp.width-app.fs
+                    width: 400//xApp.width-app.fs
                     height: app.fs*1.2
                     color: 'transparent'
                     border.width: 1
