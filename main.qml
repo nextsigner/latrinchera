@@ -161,11 +161,13 @@ Window {
                     function run(){
 
                         console.log('btnActualizar.run()...')
-                        let urlZipFile='http://'+apps.uIp+':'+apps.uPort+'/zip/'+apps.uAppId
-                        unikObj.cProject=apps.uAppId
-                        setHistorial(tiAppId.text)
+                        let proyecto=tiAppId.text.replace(/ /g, '')
+                        let urlZipFile='http://'+apps.uIp+':'+apps.uPort+'/zip/'+proyecto
+                        unikObj.cProject=proyecto
+                        unikObj.cProject=proyecto
+                        setHistorial(proyecto)
                         unikObj.uUrl=urlZipFile
-                        let descargado=unikObj.downloadGitHubZip(urlZipFile, apps.uAppId+"_main.zip");
+                        let descargado=unikObj.downloadGitHubZip(urlZipFile, proyecto+".zip");
                         if(descargado){
                             //apps.uIdApp=url
                         }
@@ -362,7 +364,7 @@ Window {
                 }else{
                     folder=unikObj.getPath(4)+'/runik'
                 }
-                let folderQml=folder+'/'+unikObj.cProject+'-main'
+                let folderQml=folder+'/'+unikObj.cProject
                 let mainFile=folderQml+'/main.qml'
                 if (success) {
                     console.log("¡Archivo descargado en la ruta temporal!: " + filePath);
