@@ -373,7 +373,7 @@ Window {
                     log.text+='Descargado!: '+filePath+'<br>'
                     let descomprimido=unikObj.uncompressZip(filePath, folder)
                     log.text+='descomprimido: '+descomprimido+'<br>'
-                    return
+
                     if(descomprimido){
                         msg="Se ha descomprimido el arhivo!\nCarpeta: "+folder
                         //let folderQml=folder+'/'+unikObj.cProject+'-main'
@@ -383,6 +383,8 @@ Window {
                         msg+='\nArchivos: '+files.toString()
                         //let mainFile=folderQml+'/main.qml'
                         console.log('mainFile: '+mainFile)
+                        log.text+='folderQml: '+folderQml+'<br>'
+                        return
                         unikObj.cd(folderQml)
                         //unikObj.mkdir(folderQml+'/modules')
                         if(unikObj.folderExist(folderQml+'/modules')){
