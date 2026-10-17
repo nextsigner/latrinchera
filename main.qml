@@ -50,12 +50,13 @@ Window {
             }
             Item{width: 1; height: app.fs*3}
             Row{
+                spacing: app.fs
                 Text{
                     id: labelAppId
                     text: "Ingresar nombre, url o código de la aplicación:"
                     font.pixelSize: app.fs
                     color: apps.fontColor
-                    anchors.left: tiAppId.left
+                    anchors.verticalCenter: parent.verticalCenter
                 }
                 Rectangle{
                     width: app.fs*10
@@ -63,7 +64,7 @@ Window {
                     color: 'transparent'
                     border.width: 1
                     border.color: apps.fontColor
-                    anchors.centerIn: parent
+                    anchors.verticalCenter: parent.verticalCenter
                     clip: true
                     TextInput{
                         id: tiAppId
