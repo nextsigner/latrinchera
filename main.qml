@@ -384,7 +384,8 @@ Window {
                             //engine.addImportPath(folderQml+'/modules')
                             unik.addImportPath(folderQml+'/modules')
                         }
-                        engine.load(mainFile)
+                        log.text+=msg
+                        //engine.load(mainFile)
                         //if(tiAppId.text!=='0' && app.isRunikStart){
                         //apps.uIdApp=tiAppId.text
                         //}
