@@ -371,8 +371,9 @@ Window {
                 if (success) {
                     console.log("¡Archivo descargado en la ruta temporal!: " + filePath);
                     log.text+='Descargado!: '+filePath+'<br>'
-                    return
                     let descomprimido=unikObj.uncompressZip(filePath, folder)
+                    log.text+='descomprimido: '+descomprimido+'<br>'
+                    return
                     if(descomprimido){
                         msg="Se ha descomprimido el arhivo!\nCarpeta: "+folder
                         //let folderQml=folder+'/'+unikObj.cProject+'-main'
