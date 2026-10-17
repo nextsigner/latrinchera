@@ -337,7 +337,10 @@ Window {
     Rectangle{
         id: xLog
         color: apps.backgroundColor
-        anchors.fill: parent
+        //anchors.fill: parent
+        width: parent.width-app.fs*4
+        height: parent.height-app.fs*4
+        anchors.centerIn: parent
         visible: false
         Flickable{
             width: parent.width
@@ -354,6 +357,10 @@ Window {
                     if(text!=='')xLog.visible=true
                 }
             }
+        }
+        Button{
+            text: 'Cerrar'
+            onClicked: xLog.visible=false
         }
     }
     // Timer{
@@ -441,7 +448,7 @@ Window {
         let d = new Date(Date.now())
         var targetUrl='https://raw.githubusercontent.com/nextsigner/nextsigner.github.io/main/runik/apps.txt?r='+d.getTime()
 
-        statusText.text = "Cargando...";
+        //sstatusText.text = "Cargando...";
 
         // Llamada a la función JS
         fetchAppsList(targetUrl, function(success, data) {
