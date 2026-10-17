@@ -52,6 +52,36 @@ Window {
             Item{width: 1; height: app.fs*3}
             Row{
                 spacing: app.fs
+                anchors.horizontalCenter: parent.horizontalCenter
+                Text{
+                    id: labelPuerto
+                    text: "Puerto:"
+                    font.pixelSize: app.fs
+                    color: apps.fontColor
+                    anchors.verticalCenter: parent.verticalCenter
+                }
+                Rectangle{
+                    width: app.fs*6
+                    height: app.fs*2
+                    color: 'transparent'
+                    border.width: 1
+                    border.color: apps.fontColor
+                    anchors.verticalCenter: parent.verticalCenter
+                    clip: true
+                    TextInput{
+                        id: tiPuerto
+                        text: apps.uPort
+                        width: parent.width-app.fs
+                        height: app.fs
+                        font.pixelSize: app.fs
+                        color: apps.fontColor
+                        anchors.centerIn: parent
+                    }
+                }
+            }
+            Row{
+                spacing: app.fs
+                anchors.horizontalCenter: parent.horizontalCenter
                 Text{
                     id: labelAppId
                     text: "Nombre de App:"
