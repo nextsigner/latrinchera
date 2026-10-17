@@ -36,17 +36,16 @@ Window {
         //anchors.fill: parent
         width: Screen.width-app.fs*4
         height: Screen.height-app.fs*6
-        border.width: 3
-        border.color: 'yellow'
+        border.width: 1
+        border.color: '#ccc'
         anchors.centerIn: parent
-
         Column{
             spacing: app.fs*0.5
             width: xApp.width*0.5
             anchors.centerIn: parent
             Text{
                 text: app.title
-                font.pixelSize: app.fs*3
+                font.pixelSize: app.fs*2
                 color: apps.fontColor
                 anchors.horizontalCenter: parent.horizontalCenter
             }
@@ -61,8 +60,8 @@ Window {
                     anchors.verticalCenter: parent.verticalCenter
                 }
                 Rectangle{
-                    width: 400//xApp.width-app.fs
-                    height: app.fs*1.2
+                    width: xApp.width-labelAppId.contentWidth-parent.spacing
+                    height: app.fs*2
                     color: 'transparent'
                     border.width: 1
                     border.color: apps.fontColor

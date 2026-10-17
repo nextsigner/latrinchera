@@ -1,1 +1,1 @@
-Se sube main.qml 11
+Se sube main.qml 12
