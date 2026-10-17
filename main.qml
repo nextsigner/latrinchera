@@ -162,7 +162,7 @@ Window {
 
                         console.log('btnActualizar.run()...')
                         let urlZipFile='http://'+apps.uIp+':'+apps.uPort+'/zip/'+apps.uAppId
-                        unikObj.cProject=pn
+                        unikObj.cProject=apps.uAppId
                         setHistorial(tiAppId.text)
                         unikObj.uUrl=urlZipFile
                         let descargado=unikObj.downloadGitHubZip(urlZipFile, apps.uAppId+"_main.zip");
