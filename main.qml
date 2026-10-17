@@ -111,7 +111,7 @@ Window {
 //                                    if(args[0]===tiAppId.text && tiAppId.text!=='0'){
 //                                        unikObj.cProject=args[1]
 //                                        urlZipFile=getGitHubZipUrl(args[2])
-//                                        statusText.text='Descargando '+urlZipFile
+//                                        //statusText.text='Descargando '+urlZipFile
 //                                        setHistorial(tiAppId.text)
 //                                        unikObj.uUrl=url
 //                                        let descargado = unikObj.downloadGitHubZip(urlZipFile, args[1]+"_main.zip");
@@ -262,12 +262,12 @@ Window {
                     let percent = (bytesReceived / bytesTotal) * 100;
                     msg="Progreso: " + percent.toFixed(2) + "% (" + bytesReceived + " / " + bytesTotal + " bytes)"
                     console.log(msg);
-                    statusText.text=msg
+                    //statusText.text=msg
                     progressBar.value = bytesReceived / bytesTotal;
                 } else {
                     msg="Descargando... Bytes recibidos: " + bytesReceived
                     console.log(msg);
-                    statusText.text=msg
+                    //statusText.text=msg
                 }
             }
             onDownloadFinished: function(success, filePath) {
@@ -305,11 +305,11 @@ Window {
                         //}
                         app.close()
                         console.log(msg)
-                        statusText.text=msg
+                        //statusText.text=msg
 
                     }else{
                         msg="Error! No se ha descomprimido el arhivo!"
-                        statusText.text=msg
+                        //statusText.text=msg
                     }
                 } else {
                     msg="Error al descargar el archivo ZIP."
@@ -327,7 +327,6 @@ Window {
                         msg='Hay un error en la url o ha fallado la conexión de internet.\n'
                     }
                     console.log(msg);
-                    statusText.text=msg
                 }
             }
         }
@@ -338,8 +337,8 @@ Window {
         id: xLog
         color: apps.backgroundColor
         //anchors.fill: parent
-        width: parent.width-app.fs*4
-        height: parent.height-app.fs*4
+        width: Screen.width-app.fs*4
+        height: Screen.height-app.fs*4
         anchors.centerIn: parent
         visible: false
         Flickable{
@@ -363,12 +362,6 @@ Window {
             onClicked: xLog.visible=false
         }
     }
-    // Timer{
-    //     running: true
-    //     repeat: true
-    //     interval: 5000
-    //     onTriggered: unik.speak('Hola. Aplicación runik iniciada.')
-    // }
     Component.onCompleted: {
         //apps.autoLoad=false
 
@@ -405,7 +398,7 @@ Window {
                 app.close()
                 return
             }else{
-                statusText.text="El archivo "+mainPath+' no existe!'
+                //statusText.text="El archivo "+mainPath+' no existe!'
             }
         }
 
@@ -420,18 +413,6 @@ Window {
         //let c='import QtQuickff'
         //let obj=Qt.createQmlObject(c, xApp, 'pruebaErrorQml-code')
     }
-
-    /*Component.onCompleted: {
-        // Retardamos la llamada 1.5 segundos
-        timer.restart()
-    }
-
-    Timer {
-        id: timer
-        interval: 5000
-        repeat: false
-        onTriggered: getAppsList()
-    }*/
 
     Shortcut{
         sequence: 'Esc'
@@ -454,8 +435,8 @@ Window {
         fetchAppsList(targetUrl, function(success, data) {
             if (success) {
                 //textArea.text = data;
-                statusText.text = "Lista de aplicaciones descargada con éxito.";
-                statusText.text+='\n'+data
+                //statusText.text = "Lista de aplicaciones descargada con éxito.";
+                //statusText.text+='\n'+data
                 app.uAppsList=data.split('\n')
                 /*if(!app.isRunikStart && Qt.application.arguments.indexOf('-dev')<0 && tiAppId.text!=='https://github.com/nextsigner/runik-start'){
                     console.log('Actualizando Runik-Start: ['+tiAppId.text+']')
@@ -464,7 +445,7 @@ Window {
                     }
                 }*/
             } else {
-                statusText.text = data; // Muestra el mensaje de error
+                //statusText.text = data; // Muestra el mensaje de error
             }
         });
     }
