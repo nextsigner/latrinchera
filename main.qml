@@ -14,7 +14,6 @@ Window {
     property var uAppsList: []
     Settings{
         id: apps
-        //fileName: unikObj.getPath(4)+'/runik.cfg'
         property color backgroundColor: 'black'
         property color fontColor: 'white'
     }
@@ -35,216 +34,219 @@ Window {
         width: parent.width-app.fs*4
         height: parent.height-app.fs*6
         anchors.centerIn: parent
-        Column{
-            spacing: app.fs*0.5
-            width: xApp.width*0.5
-            anchors.centerIn: parent
-            Text{
-                text: app.title
-                font.pixelSize: app.fs*3
-                color: apps.fontColor
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-            Item{width: 1; height: app.fs*3}
-            Text{
-                id: labelAppId
-                text: "Ingresar nombre, url o código de la aplicación:"
-                font.pixelSize: app.fs
-                color: apps.fontColor
-                anchors.left: tiAppId.left
-            }
-            TextInput{
-                id: tiAppId
-                text: apps.uIdApp//'https://github.com/nextsigner/semitimes-m1'
-                width: xApp.width-app.fs*4
-                height: app.fs*1.2
-                font.pixelSize: app.fs
-                color: apps.fontColor
-                anchors.horizontalCenter: parent.horizontalCenter
-                Rectangle{
-                    width: parent.width+app.fs*0.5
-                    height: parent.height+app.fs*0.5
-                    color: 'transparent'
-                    border.width: 1
-                    border.color: apps.fontColor
-                    anchors.centerIn: parent
-                }
-            }
-            Row{
-                spacing: app.fs*0.5
-                anchors.horizontalCenter: parent.horizontalCenter
-                Button{
-                    text: "Historial"
-                    font.pixelSize: app.fs
-                    onClicked: {
-                        getHistorial()
-                    }
-                }
-                Button{
-                    id: btnActualizar
-                    text: "Actualizar"
-                    font.pixelSize: app.fs
-                    onClicked: run()
-                    function run(){
-                        console.log('btnActualizar.run()...')
-                        let urlZipFile
-                        if(tiAppId.text.indexOf('https:')===0 || tiAppId.text==='0'){
-                            let url=tiAppId.text
-                            if(tiAppId.text==='0'){
-                                url="https://github.com/nextsigner/runik-start"
-                            }
-                            urlZipFile=getGitHubZipUrl(url)
-                            let m0=url.split('/')
-                            let pn=m0[m0.length-1]
-                            unikObj.cProject=pn
-                            setHistorial(tiAppId.text)
-                            unikObj.uUrl=url
-                            let descargado=unikObj.downloadGitHubZip(urlZipFile, pn+"_main.zip");
-                            if(descargado){
-                                apps.uIdApp=url
-                            }
-                        }else{
-                            for(var i=0;i<app.uAppsList.length;i++){
-                                let linea=app.uAppsList[i]
-                                if(linea.length>3){
-                                    let args=linea.split(' ')
-                                    if(args[0]===tiAppId.text && tiAppId.text!=='0'){
-                                        unikObj.cProject=args[1]
-                                        urlZipFile=getGitHubZipUrl(args[2])
-                                        statusText.text='Descargando '+urlZipFile
-                                        setHistorial(tiAppId.text)
-                                        unikObj.uUrl=url
-                                        let descargado = unikObj.downloadGitHubZip(urlZipFile, args[1]+"_main.zip");
-                                        if(descargado){
-                                            apps.uIdApp=url
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            ProgressBar {
-                id: progressBar
-                width: app.width-app.fs
-                anchors.horizontalCenter: parent.horizontalCenter
-                from: 0
-                to: 1
-                value: 0
-                Rectangle{
-                    color: 'transparent'
-                    border.width: 2
-                    border.color: apps.fontColor
-                    anchors.fill: parent
-                    Text{
-                        text:  '%'+progressBar.value
-                        font.pixelSize: app.fs*0.5
-                        color: apps.fontColor
-                        anchors.centerIn: parent
-                        Rectangle{
-                            width: parent.contentWidth+4
-                            height: parent.contentHeight
-                            color: apps.backgroundColor
-                            anchors.centerIn: parent
-                            z: parent.z-1
-                        }
-                    }
-                }
-            }
-            Text{
-                id: statusText
-                text: ""
-                width: xApp.width-app.fs
-                wrapMode: Text.WordWrap
-                font.pixelSize: app.fs
-                color: apps.fontColor
-            }
 
-        }
-        Rectangle{
-            id: xHistorial
-            color: apps.backgroundColor
-            border.width: 2
-            border.color: apps.fontColor
-            anchors.fill: parent
-            visible: false
-            ListView{
-                id: lv
-                spacing: app.fs
-                width: parent.width
-                height: parent.height*0.9
-                //anchors.centerIn: parent
-                model: lm
-                delegate: compLv
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.top: parent.top
-                anchors.topMargin: app.fs
-                ListModel{
-                    id: lm
-                    function addItem(d){
-                        return{
-                            dato: d
-                        }
-                    }
-                }
-                Component{
-                    id: compLv
-                    Rectangle{
-                        id: xItemLv
-                        width: lv.width-app.fs
-                        height: app.fs*1.5//*0.65
-                        color: 'transparent'
-                        border.width: 1
-                        border.color: apps.fontColor
-                        radius: app.fs*0.25
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        clip: true
-                        MouseArea{
-                            anchors.fill: parent
-                            onClicked: {
-                                tiAppId.text=dato
-                                xHistorial.visible=false
+//        Column{
+//            spacing: app.fs*0.5
+//            width: xApp.width*0.5
+//            anchors.centerIn: parent
+//            Text{
+//                text: app.title
+//                font.pixelSize: app.fs*3
+//                color: apps.fontColor
+//                anchors.horizontalCenter: parent.horizontalCenter
+//            }
+//            Item{width: 1; height: app.fs*3}
+//            Text{
+//                id: labelAppId
+//                text: "Ingresar nombre, url o código de la aplicación:"
+//                font.pixelSize: app.fs
+//                color: apps.fontColor
+//                anchors.left: tiAppId.left
+//            }
+//            TextInput{
+//                id: tiAppId
+//                text: apps.uIdApp//'https://github.com/nextsigner/semitimes-m1'
+//                width: xApp.width-app.fs*4
+//                height: app.fs*1.2
+//                font.pixelSize: app.fs
+//                color: apps.fontColor
+//                anchors.horizontalCenter: parent.horizontalCenter
+//                Rectangle{
+//                    width: parent.width+app.fs*0.5
+//                    height: parent.height+app.fs*0.5
+//                    color: 'transparent'
+//                    border.width: 1
+//                    border.color: apps.fontColor
+//                    anchors.centerIn: parent
+//                }
+//            }
+//            Row{
+//                spacing: app.fs*0.5
+//                anchors.horizontalCenter: parent.horizontalCenter
+//                Button{
+//                    text: "Historial"
+//                    font.pixelSize: app.fs
+//                    onClicked: {
+//                        getHistorial()
+//                    }
+//                }
+//                Button{
+//                    id: btnActualizar
+//                    text: "Actualizar"
+//                    font.pixelSize: app.fs
+//                    onClicked: run()
+//                    function run(){
+//                        console.log('btnActualizar.run()...')
+//                        let urlZipFile
+//                        if(tiAppId.text.indexOf('https:')===0 || tiAppId.text==='0'){
+//                            let url=tiAppId.text
+//                            if(tiAppId.text==='0'){
+//                                url="https://github.com/nextsigner/runik-start"
+//                            }
+//                            urlZipFile=getGitHubZipUrl(url)
+//                            let m0=url.split('/')
+//                            let pn=m0[m0.length-1]
+//                            unikObj.cProject=pn
+//                            setHistorial(tiAppId.text)
+//                            unikObj.uUrl=url
+//                            let descargado=unikObj.downloadGitHubZip(urlZipFile, pn+"_main.zip");
+//                            if(descargado){
+//                                apps.uIdApp=url
+//                            }
+//                        }else{
+//                            for(var i=0;i<app.uAppsList.length;i++){
+//                                let linea=app.uAppsList[i]
+//                                if(linea.length>3){
+//                                    let args=linea.split(' ')
+//                                    if(args[0]===tiAppId.text && tiAppId.text!=='0'){
+//                                        unikObj.cProject=args[1]
+//                                        urlZipFile=getGitHubZipUrl(args[2])
+//                                        statusText.text='Descargando '+urlZipFile
+//                                        setHistorial(tiAppId.text)
+//                                        unikObj.uUrl=url
+//                                        let descargado = unikObj.downloadGitHubZip(urlZipFile, args[1]+"_main.zip");
+//                                        if(descargado){
+//                                            apps.uIdApp=url
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            ProgressBar {
+//                id: progressBar
+//                width: app.width-app.fs
+//                anchors.horizontalCenter: parent.horizontalCenter
+//                from: 0
+//                to: 1
+//                value: 0
+//                Rectangle{
+//                    color: 'transparent'
+//                    border.width: 2
+//                    border.color: apps.fontColor
+//                    anchors.fill: parent
+//                    Text{
+//                        text:  '%'+progressBar.value
+//                        font.pixelSize: app.fs*0.5
+//                        color: apps.fontColor
+//                        anchors.centerIn: parent
+//                        Rectangle{
+//                            width: parent.contentWidth+4
+//                            height: parent.contentHeight
+//                            color: apps.backgroundColor
+//                            anchors.centerIn: parent
+//                            z: parent.z-1
+//                        }
+//                    }
+//                }
+//            }
+//            Text{
+//                id: statusText
+//                text: ""
+//                width: xApp.width-app.fs
+//                wrapMode: Text.WordWrap
+//                font.pixelSize: app.fs
+//                color: apps.fontColor
+//            }
 
-                            }
-                        }
-                        Rectangle{
-                            width: parent.height-4
-                            height: parent.height-4
-                            color: apps.fontColor
-                            anchors.right: parent.right
-                            anchors.rightMargin: 2
-                            anchors.verticalCenter: parent.verticalCenter
-                            MouseArea{
-                                anchors.fill: parent
-                                onClicked: delHistorial(dato)
-                            }
-                            Text{
-                                text: "X"
-                                font.pixelSize: parent.width
-                                color: apps.backgroundColor
-                                anchors.centerIn: parent
-                            }
-                        }
-                        Text{
-                            id: txtDato
-                            text: dato
-                            font.pixelSize: app.fs
-                            color: apps.fontColor
-                            opacity: !tSetFS.running?1.0:0.0
-                            anchors.centerIn: parent
-                            Timer{
-                                id: tSetFS
-                                running: parent.contentWidth>parent.parent.width-app.fs*4
-                                repeat: true
-                                interval: 100
-                                onTriggered: parent.font.pixelSize-=2
-                            }
-                        }
-                    }
-                }
-            }
-        }
+//        }
+//        Rectangle{
+//            id: xHistorial
+//            color: apps.backgroundColor
+//            border.width: 2
+//            border.color: apps.fontColor
+//            anchors.fill: parent
+//            visible: false
+//            ListView{
+//                id: lv
+//                spacing: app.fs
+//                width: parent.width
+//                height: parent.height*0.9
+//                //anchors.centerIn: parent
+//                model: lm
+//                delegate: compLv
+//                anchors.horizontalCenter: parent.horizontalCenter
+//                anchors.top: parent.top
+//                anchors.topMargin: app.fs
+//                ListModel{
+//                    id: lm
+//                    function addItem(d){
+//                        return{
+//                            dato: d
+//                        }
+//                    }
+//                }
+//                Component{
+//                    id: compLv
+//                    Rectangle{
+//                        id: xItemLv
+//                        width: lv.width-app.fs
+//                        height: app.fs*1.5//*0.65
+//                        color: 'transparent'
+//                        border.width: 1
+//                        border.color: apps.fontColor
+//                        radius: app.fs*0.25
+//                        anchors.horizontalCenter: parent.horizontalCenter
+//                        clip: true
+//                        MouseArea{
+//                            anchors.fill: parent
+//                            onClicked: {
+//                                tiAppId.text=dato
+//                                xHistorial.visible=false
+
+//                            }
+//                        }
+//                        Rectangle{
+//                            width: parent.height-4
+//                            height: parent.height-4
+//                            color: apps.fontColor
+//                            anchors.right: parent.right
+//                            anchors.rightMargin: 2
+//                            anchors.verticalCenter: parent.verticalCenter
+//                            MouseArea{
+//                                anchors.fill: parent
+//                                onClicked: delHistorial(dato)
+//                            }
+//                            Text{
+//                                text: "X"
+//                                font.pixelSize: parent.width
+//                                color: apps.backgroundColor
+//                                anchors.centerIn: parent
+//                            }
+//                        }
+//                        Text{
+//                            id: txtDato
+//                            text: dato
+//                            font.pixelSize: app.fs
+//                            color: apps.fontColor
+//                            opacity: !tSetFS.running?1.0:0.0
+//                            anchors.centerIn: parent
+//                            Timer{
+//                                id: tSetFS
+//                                running: parent.contentWidth>parent.parent.width-app.fs*4
+//                                repeat: true
+//                                interval: 100
+//                                onTriggered: parent.font.pixelSize-=2
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+
+
     }
 
 
