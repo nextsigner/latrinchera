@@ -441,7 +441,7 @@ Window {
                 wrapMode: Text.WordWrap
                 textFormat: Text.RichText
                 onTextChanged: {
-                    if(text!=='')xLog.visible=true
+                    if(log.text!=='')xLog.visible=true
                 }
             }
         }
