@@ -131,7 +131,7 @@ Window {
                     clip: true
                     TextInput{
                         id: tiAppId
-                        text: apps.uIdApp//'https://github.com/nextsigner/semitimes-m1'
+                        text: apps.uAppId
                         width: parent.width-app.fs
                         height: app.fs
                         font.pixelSize: app.fs

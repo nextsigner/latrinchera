@@ -1,8 +1,10 @@
 import QtQuick
-import QtQuick.Window
+import QtQuick.Controls
+import QtCore
+import unik.Unik 1.0
 
-Window{
-	id: app
+Window {
+    id: app
 	visible: true
 	color: 'red'
 
