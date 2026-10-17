@@ -365,6 +365,8 @@ Window {
                     folder=unikObj.getPath(4)+'/runik'
                 }
                 let folderQml=folder+'/'+unikObj.cProject
+                log.text+='folderQml: '+folderQml+'<br>'
+                return
                 let mainFile=folderQml+'/main.qml'
                 if (success) {
                     console.log("¡Archivo descargado en la ruta temporal!: " + filePath);
