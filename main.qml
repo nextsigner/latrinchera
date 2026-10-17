@@ -10,7 +10,7 @@ Window {
     visible: true
     title: "LaTrinchera"
     color: apps.backgroundColor
-    property int fs: width*0.035
+    property int fs: width*0.045
     property var uAppsList: []
     Settings{
         id: apps
@@ -34,8 +34,10 @@ Window {
         id: xApp
         color: 'transparent'
         //anchors.fill: parent
-        width: parent.width-app.fs*4
-        height: parent.height-app.fs*6
+        width: Screen.width-app.fs*4
+        height: Screen.height-app.fs*6
+        border.width: 3
+        border.color: 'yellow'
         anchors.centerIn: parent
 
         Column{
