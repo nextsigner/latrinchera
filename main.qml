@@ -131,7 +131,7 @@ Window {
                     clip: true
                     TextInput{
                         id: tiAppId
-                        text: '222'//apps.uIdApp//'https://github.com/nextsigner/semitimes-m1'
+                        text: apps.uIdApp//'https://github.com/nextsigner/semitimes-m1'
                         width: parent.width-app.fs
                         height: app.fs
                         font.pixelSize: app.fs
@@ -510,7 +510,8 @@ Window {
 
     function getAppsList(){
         let d = new Date(Date.now())
-        var targetUrl='https://raw.githubusercontent.com/nextsigner/nextsigner.github.io/main/runik/apps.txt?r='+d.getTime()
+        //var targetUrl='https://raw.githubusercontent.com/nextsigner/nextsigner.github.io/main/runik/apps.txt?r='+d.getTime()
+        var targetUrl='http://'+apps.uIp+':'+apps.uPort+'/apps.txt?r='+d.getTime()
 
         //sstatusText.text = "Cargando...";
 
