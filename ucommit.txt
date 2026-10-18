@@ -1,1 +1,1 @@
-Se edita main.qml 35
+Se edita main.qml 36
