@@ -397,7 +397,7 @@ Window {
                         //if(tiAppId.text!=='0' && app.isRunikStart){
                         //apps.uIdApp=tiAppId.text
                         //}
-                        app.close()
+                        //app.close()
                         console.log(msg)
                         //statusText.text=msg
 
