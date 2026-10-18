@@ -393,7 +393,8 @@ Window {
                         }
                         log.text+=msg
                         log.text+='mainFile: '+mainFile+'<br>'
-                        engine.load(mainFile)
+                        log.text+='main.qml existe: '+unikObj.fileExist(mainFile)+'<br>'
+                        //engine.load(mainFile)
                         return
                         //if(tiAppId.text!=='0' && app.isRunikStart){
                         //apps.uIdApp=tiAppId.text
