@@ -384,7 +384,7 @@ Window {
                         //let mainFile=folderQml+'/main.qml'
                         console.log('mainFile: '+mainFile)
                         log.text+='folderQml: '+folderQml+'<br>'
-                        return
+                        log.text+='folderQml: '+unikObj.getFileList(folderQml, '*.*')+'<br>'
                         unikObj.cd(folderQml)
                         //unikObj.mkdir(folderQml+'/modules')
                         if(unikObj.folderExist(folderQml+'/modules')){
@@ -392,6 +392,7 @@ Window {
                             unik.addImportPath(folderQml+'/modules')
                         }
                         log.text+=msg
+                        log.text+='mainFile: '+mainFile+'<br>'
                         //engine.load(mainFile)
                         //if(tiAppId.text!=='0' && app.isRunikStart){
                         //apps.uIdApp=tiAppId.text
