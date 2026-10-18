@@ -16,6 +16,9 @@ Window {
         id: apps
         property color backgroundColor: 'black'
         property color fontColor: 'white'
+
+        property bool autoLoad: false
+
         property string uAppId: ''
         property string uIp: '192.168.0.35'
         property int uPort: 8080
@@ -463,6 +466,10 @@ Window {
         }
     }
     Component.onCompleted: {
+        if(apps.autoLoad){
+            btnActualizar.clicked()
+            return
+        }
         //apps.autoLoad=false
 
 

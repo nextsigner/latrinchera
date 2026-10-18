@@ -6,6 +6,13 @@ import unik.Unik 1.0
 Window {
     id: app
 	visible: true
-	color: 'red'
+    color: '#ff8833'
+    Settings{
+        id: apps
+        property bool autoLoad: false
+    }
+    Component.onCompleted: {
+        apps.autoLoad=true
+    }
 
 }
