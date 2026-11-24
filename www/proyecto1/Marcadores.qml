@@ -1,91 +1,94 @@
 import QtQuick
 
 Item{
+    id: r
+    property var j: ({items:[]})
     Component.onCompleted: {
-        let j={}
-        j.items=[]
-        let item
-        let marcs
-        let marc
-
-        //app.positionMin=33*1000
         //Item 1
-        item={}
-        item.url="file:///storage/emulated/0/Download/Telegram/cora2.mp4"
-        item.tit="CORA N°2"
-        item.des="Resumen del video"
-        marcs=[]
+        addItem("file:///storage/emulated/0/Download/Telegram/cora2.mp4", "CORA N°2", "Resumen del video")
 
-        marc={}
-        marc.titulo="ME VUELVO A VER"
-        marc.des="Mirarse desde afuera sin piedad."
-        marc.ms=getHmsToMs(0, 1, 51)
-        marc.msf=getHmsToMs(0, 2, 22)
-        marcs.push(marc)
+        addMarc(
+                    "ME VUELVO A VER",
+                    "Mirarse desde afuera sin piedad.",
+                    [0, 1, 51], [0, 2, 22]
+                    )
 
-        marc={}
-        marc.titulo="UN BOLUDO GEMINIANO"
-        marc.des="Diciendo por vez un millón que soy Geminiano."
-        marc.ms=getHmsToMs(0, 2, 22)
-        marc.msf=getHmsToMs(0, 3, 19)
-        marcs.push(marc)
+        addMarc(
+                    "UN BOLUDO GEMINIANO",
+                    "Diciendo por vez un millón que soy Geminiano.",
+                    [0, 2, 22],
+                    [0, 3, 19]
+                    )
 
-        marc={}
-        marc.titulo="OJO! ASCENDENTE ACUARIO!"
-        marc.des="El que no entiende qué es esto escucha esto y está en pelotas."
-        marc.ms=getHmsToMs(0, 3, 20)
-        marc.msf=getHmsToMs(0, 4, 1)
-        marcs.push(marc)
+        addMarc(
+                    "OJO! ASCENDENTE ACUARIO!",
+                    "El que no entiende qué es esto escucha esto y está en pelotas.",
+                    [0, 3, 20],
+                    [0, 4, 1]
+                    )
+        addMarc(
+                    "MI FUKING PUNTO DE VISTA",
+                    "Lo dicho! Lo compartí conmigo mismo!",
+                    [0, 4, 1],
+                    [0, 4, 29]
+                    )
 
-        marc={}
-        marc.titulo="MI FUKING PUNTO DE VISTA"
-        marc.des="Lo dicho! Lo compartí conmigo mismo!"
-        marc.ms=getHmsToMs(0, 4, 1)
-        marc.msf=getHmsToMs(0, 4, 29)
-        marcs.push(marc)
+        addMarc(
+                    "ELEMENTO AIRE",
+                    "La sanata pseudo científica. jaja",
+                    [0, 4, 29],
+                    [0, 6, 11]
+                    )
+        addMarc(
+                    "ME COMPARTO A MI MISMO",
+                    "Luego...",
+                    [0, 6, 11],
+                    [0, 6, 48]
+                    )
 
-        marc={}
-        marc.titulo="ELEMENTO AIRE"
-        marc.des="La sanata pseudo científica. jaja"
-        marc.ms=getHmsToMs(0, 4, 29)
-        marc.msf=getHmsToMs(0, 6, 11)
-        marcs.push(marc)
+        addMarc(
+                    "Soy más PLATÓNICO QUE LCDTM!!!",
+                    "La contradicción",
+                    [0, 20, 6],
+                    [0, 21, 43]
+                    )
 
-        marc={}
-        marc.titulo="ME COMPARTO A MI MISMO"
-        marc.des="Luego "
-        marc.ms=getHmsToMs(0, 6, 11)
-        marc.msf=getHmsToMs(0, 6, 48)
-        marcs.push(marc)
+        addMarc(
+                    "GELATINA TENES EN EL BOCHO!!!",
+                    "COLGATE DE LA MONADOLOGÏA CHABÓN!!! o caes a un abismo de incredulidad y desprestigio mal.",
+                    [0, 22, 7],
+                    [0, 24, 30]
+                    )
+        addMarc(
+                    "MÁS CONTRADICCIÓNES!!!!",
+                    "Me pongo serio y explico que todos estos conceptos tienen una fuente hiper racional de donde derivan las verdades \"ACTUALES\" más cercanas a la \"VERDAD ABSOLUTA\"",
+                    [0, 24, 30],
+                    [0, 26, 7]
+                    )
 
-        marc={}
-        marc.titulo="Soy más PLATÓNICO QUE LCDTM!!!"
-        marc.des="La contradicción"
-        marc.ms=getHmsToMs(0, 20, 6)
-        marc.msf=getHmsToMs(0, 21, 43)
-        marcs.push(marc)
-
-        marc={}
-        marc.titulo="GELATINA TENES EN EL BOCHO!!!"
-        marc.des="COLGATE DE LA MONADOLOGÏA CHABÓN!!! o caes a un abismo de incredulidad y desprestigio mal."
-        marc.ms=getHmsToMs(0, 22, 7)
-        marc.msf=getHmsToMs(0, 24, 30)
-        marcs.push(marc)
-
-        marc={}
-        marc.titulo="MÁS CONTRADICCIÓNES!!!!"
-        marc.des="Me pongo serio y explico que todos estos conceptos tienen una fuente hiper racional de donde derivan las verdades \"ACTUALES\" más cercanas a la \"VERDAD ABSOLUTA\""
-        marc.ms=getHmsToMs(0, 24, 30)
-        marc.msf=getHmsToMs(0, 26, 7)
-        marcs.push(marc)
-
-        item.marcs=marcs
-        j.items.push(item)
-
-        app.json=j
+        app.json=r.j
 
         app.loadDataAudios()
         app.loadData(0)
 
+    }
+    function addItem(url, tit, des){
+        let item={}
+        item.url=url
+        item.tit=tit
+        item.des=des
+        r.j.items.push(item)
+    }
+    function addMarc(tit, des, aHMSInicio, aHMSFin){
+        let index=r.j.items.length-1
+        let marc={}
+        marc.titulo=tit
+        marc.des=des
+        marc.ms=getHmsToMs(aHMSInicio[0], aHMSInicio[1], aHMSInicio[2])
+        marc.msf=getHmsToMs(aHMSFin[0], aHMSFin[1], aHMSFin[2])
+        if(!r.j.items[index].marcs){
+            r.j.items[index].marcs=[]
+        }
+        r.j.items[index].marcs.push(marc)
     }
 }

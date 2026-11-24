@@ -274,7 +274,7 @@ Window {
                 }
                 Text {
                     id: txtCentral
-                    text: "Desde: " + getMsToString(mediaPlayer.position) + '\nHasta: '+getMsToString(app.positionMax)+'\nTotal: '+getMsToString(mediaPlayer.duration)//+"\nP:"+app.playingFromCache
+                    text: "Desde: " + getMsToString(app.positionMin) +"\nActual: " + (mediaPlayer.position>=app.positionMin?getMsToString(mediaPlayer.position):getMsToString(app.positionMin))+ '\nHasta: '+getMsToString(app.positionMax)+'\nTotal: '+getMsToString(mediaPlayer.duration)//+"\nP:"+app.playingFromCache
                     width: progressContainer.width
                     color: 'white'
                     font.pixelSize: app.fs*2
@@ -284,6 +284,12 @@ Window {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.bottom: parent.bottom
 
+                }
+                Button{
+                    text: apps.autoLoad?'<b>AutoLoad!</b>':'AutoLoad'
+                    onClicked: {
+                        //apps.autoLoad=!apps.autoLoad
+                    }
                 }
             }
             Rectangle {
@@ -508,9 +514,11 @@ Window {
         MediaPlayer {
             id: mediaPlayer
             videoOutput: videoOutput
+
             audioOutput: AudioOutput {
                 id: audioOutput
                 volume: apps.volumeValue / 100.0
+                //audioRole: Audio.MusicRole
             }
             onPositionChanged:{
                 if(mediaPlayer.position<app.positionMin){
@@ -535,7 +543,9 @@ Window {
         Rectangle{
             id: xLog
             color: 'black'
-            anchors.fill: parent
+            width: parent.width-app.fs*4
+            height: parent.height-app.fs*6
+            anchors.centerIn: parent
             visible: false
             MouseArea{
                 anchors.fill: parent
@@ -551,9 +561,9 @@ Window {
             }
         }
     }
-    Marcadores{}
+    Marcadores{id: marcadores}
     Component.onCompleted: {
-        apps.autoLoad=true
+        apps.autoLoad=false
     }
 
     Shortcut {
@@ -574,9 +584,12 @@ Window {
         let m0=item.url.split('/')
         if(index===0){
             app.positionMin=item.marcs[0].ms
+            app.positionMax=item.marcs[0].msf
         }else{
             app.positionMin=0
+
         }
+        app.positionMin=item.marcs[0].ms
         app.positionMax=item.marcs[0].msf
 
         mediaPlayer.source=item.url
