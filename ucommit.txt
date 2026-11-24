@@ -1,1 +1,1 @@
-Se elimina carpeta zoolar
+Se edita gitignore
